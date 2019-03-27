@@ -43,43 +43,43 @@
                                             <tr sty>
                                                     <th scope="row" class="col-lg-4">Nama</th>
                                                     <td>:</td>
-                                                    <td>Guru A</td>
+                                                    <td id="name"></td>
                                                     <td> </td>
                                             </tr>
                                             <tr>
                                                     <th scope="row" class="col-lg-4">Tempat, Tanggal Lahir</th>
                                                     <td>:</td>
-                                                    <td>Solo, 20 April 1994</td>
+                                                    <td id="ttl"></td>
                                                     <td> </td>
                                             </tr>     
                                             <tr>
                                                 <th scope="row" class="col-lg-4">Jenis Kelamin</th>
                                                 <td>:</td>
-                                                <td>Pria</td>
+                                                <td id="kelamin"></td>
                                                 <td> </td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" class="col-lg-4">Asal Sekolah</th>
                                                 <td>:</td>
-                                                <td>SD N Karangmloko</td>
+                                                <td id="asal_sekolah"></td>
                                                 <td> </td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" class="col-lg-4">Status/Jabatan di Sekolah</th>
                                                 <td>:</td>
-                                                <td>Guru</td>
+                                                <td id="status"></td>
                                                 <td> </td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" class="col-lg-4">Pendidikan Terakhir</th>
                                                 <td>:</td>
-                                                <td>Sarjana</td>
+                                                <td id="pendidikan_terakhir"></td>
                                                 <td> </td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" class="col-lg-4">Kontak / No. HP :</th>
                                                 <td>:</td>
-                                                <td>0812313432</td>
+                                                <td id="kontak"></td>
                                                 <td> </td>
                                             </tr>
 
@@ -100,26 +100,25 @@
                                             <div class="col-md-6">
                                                 <div class="p-20">
                                                     <h5><b>Alamat :</b></h5>
-                                                    <p class="text-muted m-b-15 font-13">
-                                                        Jalan Kaliurang KM 7
-                                                   
+                                                    <p id="alamat" class="text-muted m-b-15 font-13">                                                   
                                                     <div class="m-t-20">
                                                         <h5><b>Nama Kecamatan :</b></h5>
                                                         <p class="text-muted m-b-15 font-13">
-                                                            Ngaglik
+                                                            {{-- Ngaglik --}}
                                                         </p>
                                                     </div>
 
                                                     <div class="m-t-20">
                                                             <h5><b>Kode Kabupaten :</b></h5>
-                                                            <p class="text-muted m-b-15 font-13">
-                                                                117
+                                                            <p id="kota" class="text-muted m-b-15 font-13">
+                                                                {{-- 117 --}}
                                                             </p>
                                                         </div>
                                                     
                                                     <div class="m-t-20">
                                                         <h5><b>Nama Kabupaten :</b></h5>
-                                                        <p class="text-muted m-b-15 font-13">Sleman
+                                                        <p id="kabupaten" class="text-muted m-b-15 font-13">
+                                                            {{-- Sleman --}}
                                                             &nbsp;
                                                         </p>
 
@@ -130,27 +129,28 @@
                                             <div class="col-md-6">
                                                     <div class="p-20">
                                                             <h5><b>Kode Propinsi :</b></h5>
-                                                            <p class="text-muted m-b-15 font-13">
-                                                                551
+                                                            <p id="kode_prov" class="text-muted m-b-15 font-13">
+                                                                {{-- 551 --}}
                                                             </p>
                                                            
                                                             <div class="m-t-20">
                                                                 <h5><b>Nama Propinsi :</b></h5>
-                                                                <p class="text-muted m-b-15 font-13">
-                                                                    DI Yogyakarta
+                                                                <p id="nama_prov" class="text-muted m-b-15 font-13">
+                                                                {{-- tes --}}
                                                                 </p>
                                                             </div>
 
                                                             <div class="m-t-20">
                                                                     <h5><b>Lintang Utara :</b></h5>
                                                                     <p class="text-muted m-b-15 font-13">
-                                                                        116 LU
+                                                                        {{-- 116 LU --}}
                                                                     </p>
                                                                 </div>
                                                             
                                                             <div class="m-t-20">
                                                                 <h5><b>Lintang Selatan :</b></h5>
-                                                                <p class="text-muted m-b-15 font-13">116 LS
+                                                                <p class="text-muted m-b-15 font-13">
+                                                                    {{-- 116 LS --}}
                                                                     &nbsp;
                                                                 </p>
 
@@ -171,6 +171,37 @@
 
 </div>
 
+<script>
+
+
+$(document).ready(function(){
+    // Ambil id dari url
+    var id = new URLSearchParams(document.location.search.substring(1));
+    var ini_id_user = id.get("id");
+
+    $.ajax({
+    type: 'GET',
+    url: "http://localhost/elearning/public/api/v1/users/"+ini_id_user,
+    })
+    .done(function(data){
+    console.log(data)
+
+    // Memasukan data yang didapat dari respon get ke field2 yg ada berdasarkan idnya
+
+    // membuat tag html dengan id name akan menampilkan data name , apabila data.name nilainya null atau undefined maka tidak akan ditampilkan apa2
+    document.getElementById('name').innerHTML = data.name
+
+    // Ini salah satu contoh yang bakal menghasilkan nilai null atau undefined untuk data.ttl, dikarenakan ttl tidak terdapat pada data yang didapatkan
+    // (perhatikan struktur data hasil respon GET di console)
+    document.getElementById('ttl').innerHTML = data.ttl
+
+    // Untuk field yang lain silahkan buat sendiri
+
+
+
+    })
+})
+</script>
 
 @endsection
 

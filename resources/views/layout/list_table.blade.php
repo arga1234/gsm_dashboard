@@ -27,7 +27,11 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
-
+        <script
+        src="http://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+  
         <script src="assets/js/modernizr.min.js"></script>
         
     </head>
@@ -286,6 +290,10 @@
         
         <script src="{{asset('assets/pages/datatables.editable.init.js')}}"></script>
 
+        <!-- Modal-Effect -->
+        <script src="{{asset('assets/plugins/custombox/js/custombox.min.js')}}"></script>
+        <script src="{{asset('assets/plugins/custombox/js/legacy.min.js')}}"></script>
+     
         <script>
 			$('#mainTable').editableTableWidget().numericInputExample().find('td:first').focus();
 		</script>

@@ -304,8 +304,15 @@
         <script type="text/javascript" src="{{asset('assets/pages/autocomplete.js')}}"></script>
 
         <script type="text/javascript" src="{{asset('assets/pages/jquery.form-advanced.init.js')}}"></script>
+        <script
+        src="http://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
 
-        
+        <!-- Modal-Effect -->
+        <script src="{{asset('assets/plugins/custombox/js/custombox.min.js')}}"></script>
+        <script src="{{asset('assets/plugins/custombox/js/legacy.min.js')}}"></script>
+
 		<script src="{{asset('assets/js/jquery.core.js')}}"></script>
         <script src="{{asset('assets/js/jquery.app.js')}}"></script>
 
